@@ -1,6 +1,6 @@
 # Retro Game
 
-a simple retro game built with C++ and Raylib.
+a simple retro snake game built with C++ and Raylib.
 
 ## Features
 
