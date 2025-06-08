@@ -4,7 +4,7 @@
 #include <raymath.h>
 
 // Game State
-enum class GameState : bool { RUNNING = true, PAUSE = false };
+enum class GameState { RUNNING, PAUSE, GameOver };
 
 // cell Game
 constexpr int CELL_SIZE = 30;
@@ -156,6 +156,7 @@ public:
     game_stage = GameState::PAUSE;
     score = 0;
     PlaySound(wallSound);
+    game_stage = GameState::GameOver;
   }
 
   void CheckCollisionWithTail() {
@@ -209,7 +210,19 @@ int main() {
     DrawText("Retro Snake", OFFSET - 5, 20, 40, Darkgreen);
     DrawText(TextFormat("Score: %i", game.score), OFFSET - 5,
              OFFSET + HEIGHT + 10, 40, Darkgreen);
-    game.Draw();
+
+    if (game.game_stage != GameState::GameOver) {
+      game.Draw();
+    }
+
+    if (game.game_stage == GameState::PAUSE) {
+      DrawText("Pause", WIDTH / 2, HEIGHT / 2, 40, Darkgreen);
+    }
+    if (game.game_stage == GameState::GameOver) {
+      DrawText("GameOver", WIDTH / 2, HEIGHT / 2, 40, Darkgreen);
+      DrawText("Retry? Press arrow Key", WIDTH / 2 - OFFSET * 2,
+               HEIGHT / 2 + OFFSET, 40, Darkgreen);
+    }
 
     EndDrawing();
   }
