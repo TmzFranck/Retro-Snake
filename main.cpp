@@ -198,7 +198,7 @@ int main() {
       game.snake.direction = Vector2{-1, 0};
       game.game_stage = GameState::RUNNING;
     }
-    if (IsKeyPressed(KEY_SPACE)) {
+    if (game.game_stage != GameState::GameOver && IsKeyPressed(KEY_SPACE)) {
       game.game_stage = GameState::PAUSE;
     }
 
